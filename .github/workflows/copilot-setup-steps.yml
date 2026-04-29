@@ -1,0 +1,24 @@
+name: "Copilot Setup Steps"
+
+# Run automatically when this file changes, and allow manual triggers.
+on:
+    workflow_dispatch:
+    push:
+        paths:
+            - .github/workflows/copilot-setup-steps.yml
+    pull_request:
+        paths:
+            - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+    # This job MUST be named `copilot-setup-steps` to be picked up by the Copilot coding agent.
+    copilot-setup-steps:
+        runs-on: ubuntu-latest
+
+        permissions:
+            # Required to check out the repository so setup steps can install dependencies.
+            contents: read
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
